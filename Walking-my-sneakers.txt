@@ -1,0 +1,9 @@
+платформа 9(в высоту) на 3 и ты по ней бежишь
+на платформе случайно генерируются препятствия\бонусы
+цель - пробежать как можно дальше
+
+
+
+platform 9 (at a height) by 3 and run on it 
+obstacles and bonuses are randomly generated on the platform
+the goal is to stop as much as possible
