@@ -6,6 +6,7 @@ class Patch;
 class Void;
 
 int screen[6][4];
+int fps = 0;
 
 class Player
 {
@@ -71,7 +72,7 @@ void screen_refresh() {
 
     cout << 0 << "\t1" << "\t2\n";*/
 
-    for (int i = 0; i < 6; i++)
+    /*for (int i = 0; i < 6; i++)
     {
         for (int q = 0; q < 4; q++)
         {
@@ -89,8 +90,15 @@ void screen_refresh() {
             }
         }
         cout << "\n";
-    }
-    
+    }*/
+
+
+
+    fps++;
+    cout << fps;
+
+
+    Sleep(1);
 }
 
 
@@ -99,36 +107,43 @@ void main()
     int button;
 
     cout << "Tap to start game";
-
     while (true)
     {
         if (_kbhit())
         {
-            button = _getch();
-
-            if (button == 100)
+            while (true)
             {
-                system("color 3");
+                system("CLS");
+
+                screen_refresh();
+
+                if (_kbhit())
+                {
+                    button = _getch();
+
+                    if (button == 100)
+                    {
+                        system("pause");
+                        system("color 3");
+                    }
+
+                    if (button == 115)
+                    {
+                        system("color 2");
+                    }
+
+                    if (button == 97)
+                    {
+                        system("color 1");
+                    }
+
+                    if (button == 119)
+                    {
+                        system("color 4");
+                    }
+                    system("CLS");
+                }
             }
-
-            if (button == 115)
-            {
-                system("color 2");
-            }
-
-            if (button == 97)
-            {
-                system("color 1");
-            }
-
-            if (button == 119)
-            {
-                system("color 4");
-            }
-            system("CLS");
-
-            screen_refresh();
-
         }
     }
 }
