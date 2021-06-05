@@ -4,6 +4,7 @@ class Player;
 class Puddle;
 class Patch;
 class Void;
+class Line;
 
 int screen[6][4];
 int fps = 0;
@@ -54,25 +55,19 @@ public:
     Void() {
 
     }
-
-
 };
 
+class Line  {
+    Void void1;
+    Patch patch;
+    Puddle puddle;
+public:
+    friend void screen_refresh();
+    Line() {}
+};
 
 void screen_refresh() {
-    /*cout << 15 << "\t16" << "\t17\n";
-
-    cout << 12 << "\t13" << "\t16\n";
-
-    cout << 9 << "\t10" << "\t11\n";
-
-    cout << 6 << "\t7" << "\t8\n";
-
-    cout << 3 << "\t4" << "\t5\n";
-
-    cout << 0 << "\t1" << "\t2\n";*/
-
-    /*for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 6; i++)
     {
         for (int q = 0; q < 4; q++)
         {
@@ -80,7 +75,7 @@ void screen_refresh() {
         }
         screen[i][0] = 6 - i;
     }
-    for (int i = 0; i < 6; i++)
+   /* for (int i = 0; i < 6; i++)
     {
 
         for (int q = 0; q < 4; q++)
@@ -92,13 +87,7 @@ void screen_refresh() {
         cout << "\n";
     }*/
 
-
-
-    fps++;
-    cout << fps;
-
-
-    Sleep(1);
+    Sleep(1); //25 кадров в секунду (+-)
 }
 
 
@@ -123,7 +112,6 @@ void main()
 
                     if (button == 100)
                     {
-                        system("pause");
                         system("color 3");
                     }
 
@@ -141,7 +129,6 @@ void main()
                     {
                         system("color 4");
                     }
-                    system("CLS");
                 }
             }
         }
