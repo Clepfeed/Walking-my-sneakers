@@ -1,0 +1,2 @@
+D:\C++\Walking_my_sneakers\Debug\Walking_my_sneakers.exe
+D:\C++\Walking_my_sneakers\Debug\Walking_my_sneakers.pdb

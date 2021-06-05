@@ -1,0 +1,4 @@
+﻿  Main.cpp
+D:\C++\Walking_my_sneakers\Main.cpp(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\C++\Walking_my_sneakers\Main.cpp(4,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Walking_my_sneakers.vcxproj -> D:\C++\Walking_my_sneakers\Debug\Walking_my_sneakers.exe
