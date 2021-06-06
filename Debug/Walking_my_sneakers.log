@@ -1,4 +1,5 @@
 ﻿  Main.cpp
 D:\C++\Walking_my_sneakers\Main.cpp(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\C++\Walking_my_sneakers\Main.cpp(101,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+D:\C++\Walking_my_sneakers\Main.cpp(204,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+D:\C++\Walking_my_sneakers\Main.cpp(207,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Walking_my_sneakers.vcxproj -> D:\C++\Walking_my_sneakers\Debug\Walking_my_sneakers.exe

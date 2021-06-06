@@ -1,13 +1,15 @@
 #include "Header.h";
 
+void screen_down();
+
 class Player;
 class Puddle;
 class Patch;
-class Void;
+class Space;
 class Line;
 
-int screen[6][4];
-int fps = 0;
+int start_time;
+int time_now;
 
 class Player
 {
@@ -29,8 +31,9 @@ class Puddle
 public:
     friend void screen_refresh();
 
-    Puddle() {
-
+    Puddle() {}
+    void show() {
+        cout << "\tPuddle";
     }
 };
 
@@ -41,58 +44,168 @@ class Patch
 public:
     friend void screen_refresh();
 
-    Patch() {
-
+    Patch() {}
+    void show() {
+        cout << "\tPatch";
     }
 }; 
 
-class Void
+class Space
 {
 
 public:
     friend void screen_refresh();
 
-    Void() {
+    Space() { }
 
+    void show() {
+        cout << "\tSpace";
     }
+    
 };
 
 class Line  {
-    Void void1;
+    int random_num;
+    int random_num2;
+    int patch_or_padddle;
+    Space space;
     Patch patch;
     Puddle puddle;
 public:
+    friend void screen_down();
+    friend void check_patch_or_paddle(Line a);
     friend void screen_refresh();
-    Line() {}
+    Line() {
+        random_num = rand() % 9;
+        random_num2 = rand() % 2;
+        if (random_num == 0)
+        {
+            patch_or_padddle = 1;
+        }
+        else
+        {
+            patch_or_padddle = 2;
+
+        }
+    }
+    void refresh() {
+        if (random_num2  == 0)
+        {
+            if (patch_or_padddle == 1) {
+                patch.show();
+            }
+            else
+            {
+                puddle.show();
+            }
+            space.show();
+            space.show();
+            cout << "\n";
+        }
+        else if (random_num2 == 1)
+        {
+
+            space.show();
+            if (patch_or_padddle == 1) {
+                patch.show();
+            }
+            else
+            {
+                puddle.show();
+            }
+            space.show();
+            cout << "\n";
+        }
+        else if (random_num2 == 2)
+        {
+            space.show();
+            space.show();
+            if (patch_or_padddle == 1) {
+                patch.show();
+            }
+            else
+            {
+                puddle.show();
+            }
+            cout << "\n";
+        }
+
+        
+    }
 };
 
-void screen_refresh() {
-    for (int i = 0; i < 6; i++)
-    {
-        for (int q = 0; q < 4; q++)
-        {
-            screen[i][q] = q;
-        }
-        screen[i][0] = 6 - i;
-    }
-   /* for (int i = 0; i < 6; i++)
-    {
+Line line1;
+Line line2;
+Line line3;
+Line line4;
+Line line5;
+Line line6;
 
-        for (int q = 0; q < 4; q++)
-        {
-            if (q != 0) {
-                cout << screen[i][q] << "\t";
-            }
-        }
-        cout << "\n";
-    }*/
+void screen_refresh() {
+    if (time_now == 75)
+    {
+        screen_down();
+
+        time_now = 0;
+    }
+
+    line1.refresh();
+    line2.refresh();
+    line3.refresh();
+    line4.refresh();
+    line5.refresh();
+    line6.refresh();
 
     Sleep(1); //25 кадров в секунду (+-)
+    time_now++;
 }
 
+void screen_down() {
+
+    line6.random_num = line5.random_num;
+    line6.random_num2 = line5.random_num2;
+
+    line5.random_num = line4.random_num;
+    line5.random_num2 = line4.random_num2;
+
+    line4.random_num = line3.random_num;
+    line4.random_num2 = line3.random_num2;
+
+    line3.random_num = line2.random_num;
+    line3.random_num2 = line2.random_num2;
+
+    line2.random_num = line1.random_num;
+    line2.random_num2 = line1.random_num2;
+
+    line1.random_num = rand() % 9;
+    line1.random_num2 = rand() % 3;
+
+    check_patch_or_paddle(line6);
+    check_patch_or_paddle(line5);
+    check_patch_or_paddle(line4);
+    check_patch_or_paddle(line3);
+    check_patch_or_paddle(line2);
+    check_patch_or_paddle(line1);
+}
+
+void check_patch_or_paddle(Line a) {
+    if (a.random_num == 0)  
+    {
+        a.patch_or_padddle = 1;
+    }
+    else
+    {
+        a.patch_or_padddle = 2;
+    }
+
+}
 
 void main()
 {
+    system("color 3");
+
+    srand(time(0));
+
     int button;
 
     cout << "Tap to start game";
@@ -110,24 +223,25 @@ void main()
                 {
                     button = _getch();
 
-                    if (button == 100)
+                    if (button == 100) // D
                     {
-                        system("color 3");
+                        //system("color 3");
                     }
 
-                    if (button == 115)
+                    if (button == 115) // S
                     {
-                        system("color 2");
+                        //system("color 2");
                     }
 
-                    if (button == 97)
+                    if (button == 97) // A 
                     {
-                        system("color 1");
+                        //system("color 1");
                     }
 
-                    if (button == 119)
+                    if (button == 119) // W
                     {
-                        system("color 4");
+                        //system("color 4");
+                        screen_down();
                     }
                 }
             }
