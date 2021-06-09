@@ -8,28 +8,17 @@ class Patch;
 class Space;
 class Line;
 
+
 int start_time;
 int time_now;
 
-class Player
-{
-    int health;
-    int place;
-public:
-    friend void screen_refresh();
-
-    Player() {
-
-    }
-
-};
-
 class Puddle
 {
-    int damage;
-    int place;
+    int damage = 20;
 public:
     friend void screen_refresh();
+    
+    friend class Player;
 
     Puddle() {}
     void show() {
@@ -39,10 +28,11 @@ public:
 
 class Patch
 {
-    int heal;
-    int place;
+    int heal = 50;
 public:
     friend void screen_refresh();
+
+    friend class Player;
 
     Patch() {}
     void show() {
@@ -52,7 +42,6 @@ public:
 
 class Space
 {
-
 public:
     friend void screen_refresh();
 
@@ -72,12 +61,13 @@ class Line {
     Patch patch;
     Puddle puddle;
 public:
+    friend class Player;
     friend void screen_down();
     friend void check_patch_or_paddle(Line a);
     friend void screen_refresh();
     Line() {
         random_num = rand() % 10;
-        random_num2 = rand() % 2;
+        random_num2 = rand() % 3 + 1;
         if (random_num == 0)
         {
             patch_or_padddle = 1;
@@ -102,7 +92,7 @@ public:
     }
 
     void refresh() {
-        if (random_num2 == 0)
+        if (random_num2 == 1)
         {
             if (patch_or_padddle == 1) {
                 patch.show();
@@ -115,7 +105,7 @@ public:
             space.show();
             cout << "\n";
         }
-        else if (random_num2 == 1)
+        else if (random_num2 == 2)
         {
 
             space.show();
@@ -129,7 +119,7 @@ public:
             space.show();
             cout << "\n";
         }
-        else if (random_num2 == 2)
+        else if (random_num2 == 3)
         {
             space.show();
             space.show();
@@ -154,6 +144,114 @@ Line line4;
 Line line5;
 Line line6;
 
+class Player
+{
+    int health = 100;
+    int place;
+public:
+    int x;
+    int y = 6;
+
+    friend class Line;
+    friend void screen_refresh();
+
+    Player() {
+        x = rand() % 2;
+        while (x == line6.random_num2)
+        {
+            x = rand() % 2;
+        }
+    }
+    void refresh() {
+        if (y == 1)
+        {
+            if (x == line1.random_num2)
+            {
+                if (line1.patch_or_padddle == 1)
+                {
+                    health += line1.patch.heal;
+                }
+                else
+                {
+                    health -= line1.puddle.damage;
+                }
+            }
+        }
+        else if(y == 2)
+        {
+            if (x == line2.random_num2)
+            {
+                if (line2.patch_or_padddle == 1)
+                {
+                    health += line2.patch.heal;
+                }
+                else
+                {
+                    health -= line2.puddle.damage;
+                }
+            }
+        }
+        else if (y == 3)
+        {
+            if (x == line3.random_num2)
+            {
+                if (line3.patch_or_padddle == 1)
+                {
+                    health += line3.patch.heal;
+                }
+                else
+                {
+                    health -= line3.puddle.damage;
+                }
+            }
+        }
+        else if (y == 4)
+        {
+            if (x == line4.random_num2)
+            {
+                if (line4.patch_or_padddle == 1)
+                {
+                    health += line4.patch.heal;
+                }
+                else
+                {
+                    health -= line4.puddle.damage;
+                }
+            }
+        }
+        else if (y == 5)
+        {
+            if (x == line5.random_num2)
+            {
+                if (line5.patch_or_padddle == 1)
+                {
+                    health += line5.patch.heal;
+                }
+                else
+                {
+                    health -= line5.puddle.damage;
+                }
+            }
+        }
+        else if (y == 6)
+        {
+            if (x == line6.random_num2)
+            {
+                if (line6.patch_or_padddle == 1)
+                {
+                    health += line6.patch.heal;
+                }
+                else
+                {
+                    health -= line6.puddle.damage;
+                }
+            }
+        }
+    }
+};
+
+Player player;
+
 void screen_refresh() {
     system("CLS");
 
@@ -163,6 +261,8 @@ void screen_refresh() {
 
         time_now = 0;
     }
+
+    cout << "\t\tHP - " << player.health << "\n";
 
     line1.refresh();
     line2.refresh();
@@ -194,7 +294,7 @@ void screen_down() {
     line2.random_num2 = line1.random_num2;
 
     line1.random_num = rand() % 10;
-    line1.random_num2 = rand() % 3;
+    line1.random_num2 = rand() % 3 + 1;
 
     line1.check_patch_or_paddle();
     line2.check_patch_or_paddle();
