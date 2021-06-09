@@ -196,13 +196,6 @@ void screen_down() {
     line1.random_num = rand() % 10;
     line1.random_num2 = rand() % 3;
 
-    /*check_patch_or_paddle(line6);
-    check_patch_or_paddle(line5);
-    check_patch_or_paddle(line4);
-    check_patch_or_paddle(line3);
-    check_patch_or_paddle(line2);
-    check_patch_or_paddle(line1);*/
-
     line1.check_patch_or_paddle();
     line2.check_patch_or_paddle();
     line3.check_patch_or_paddle();
@@ -212,20 +205,6 @@ void screen_down() {
 
 }
 
-//void check_patch_or_paddle(Line a) {
-//    if (a.random_num == 0)  
-//    {
-//        a.patch_or_padddle = 1;
-//		cout << "1";
-//    }
-//    else
-//    {
-//        a.patch_or_padddle = 2;
-//		cout << "2";
-//    }
-//
-//}
-
 void main()
 {
     system("color 3");
@@ -234,41 +213,72 @@ void main()
 
     int button;
 
-    cout << "Tap to start game";
     while (true)
     {
+        cout << "$$___$$_$$$$$___$$_______$$$$____$$$$___$$___$$_$$$$$\n";
+        cout << "$$___$$_$$______$$______$$__$$__$$__$$__$$$_$$$_$$\n";
+        cout << "$$_$_$$_$$$$____$$______$$______$$__$$__$$_$_$$_$$$$\n";
+        cout << "$$$$$$$_$$______$$______$$__$$__$$__$$__$$___$$_$$\n";
+        cout << "_$$_$$__$$$$$___$$$$$$___$$$$____$$$$___$$___$$_$$$$$\n\n\n";
+
+        cout << "1 - star the game\n";
+        cout << "2 - rules\n";
+        cout << "3 - quit";
         if (_kbhit())
         {
-            while (true)
+            button = _getch();
+            if (button == 49) //49 = 1
             {
-                screen_refresh();
-
-                if (_kbhit())
+                while (true)
                 {
-                    button = _getch();
+                    screen_refresh();
 
-                    if (button == 100) // D
+                    if (_kbhit())
                     {
-                        //system("color 3");
-                    }
+                        button = _getch();
 
-                    if (button == 115) // S
-                    {
-                        //system("color 2");
-                    }
+                        if (button == 100) // D
+                        {
+                            //system("color 3");
+                        }
 
-                    if (button == 97) // A 
-                    {
-                        //system("color 1");
-                    }
+                        if (button == 115) // S
+                        {
+                            //system("color 2");
+                        }
 
-                    if (button == 119) // W
-                    {
-                        //system("color 4");
-                        screen_down();
+                        if (button == 97) // A 
+                        {
+                            //system("color 1");
+                        }
+
+                        if (button == 119) // W
+                        {
+                            //system("color 4");
+                            screen_down();
+                        }
                     }
                 }
             }
+            else if (button == 50) // 50 - 2
+            {
+                int ans = 0;
+                while (ans == 0)
+                {
+                    system("CLS");
+                    cout << "nothing here now\n";
+                    cout << "\n1 - quit";
+                    button = _getch();
+                    if (button == 49) {
+                        ans = 1;
+                    }
+                }
+            }
+            else if (button == 51) // 51 - 3
+            {
+                break;
+            }
         }
+        system("CLS");
     }
 }
