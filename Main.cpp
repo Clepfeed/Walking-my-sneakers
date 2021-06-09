@@ -48,7 +48,7 @@ public:
     void show() {
         cout << "\tPatch";
     }
-}; 
+};
 
 class Space
 {
@@ -61,10 +61,10 @@ public:
     void show() {
         cout << "\tSpace";
     }
-    
+
 };
 
-class Line  {
+class Line {
     int random_num;
     int random_num2;
     int patch_or_padddle;
@@ -76,7 +76,7 @@ public:
     friend void check_patch_or_paddle(Line a);
     friend void screen_refresh();
     Line() {
-        random_num = rand() % 9;
+        random_num = rand() % 10;
         random_num2 = rand() % 2;
         if (random_num == 0)
         {
@@ -88,8 +88,21 @@ public:
 
         }
     }
+
+    void check_patch_or_paddle() {
+        if (random_num == 0)
+        {
+            patch_or_padddle = 1;
+        }
+        else
+        {
+            patch_or_padddle = 2;
+        }
+
+    }
+
     void refresh() {
-        if (random_num2  == 0)
+        if (random_num2 == 0)
         {
             if (patch_or_padddle == 1) {
                 patch.show();
@@ -130,7 +143,7 @@ public:
             cout << "\n";
         }
 
-        
+
     }
 };
 
@@ -142,6 +155,8 @@ Line line5;
 Line line6;
 
 void screen_refresh() {
+    system("CLS");
+
     if (time_now == 75)
     {
         screen_down();
@@ -156,7 +171,8 @@ void screen_refresh() {
     line5.refresh();
     line6.refresh();
 
-    Sleep(1); //25 кадров в секунду (+-)
+
+    Sleep(1); //25 кадров в секунду (+-) //на компе академии 18
     time_now++;
 }
 
@@ -177,28 +193,38 @@ void screen_down() {
     line2.random_num = line1.random_num;
     line2.random_num2 = line1.random_num2;
 
-    line1.random_num = rand() % 9;
+    line1.random_num = rand() % 10;
     line1.random_num2 = rand() % 3;
 
-    check_patch_or_paddle(line6);
+    /*check_patch_or_paddle(line6);
     check_patch_or_paddle(line5);
     check_patch_or_paddle(line4);
     check_patch_or_paddle(line3);
     check_patch_or_paddle(line2);
-    check_patch_or_paddle(line1);
-}
+    check_patch_or_paddle(line1);*/
 
-void check_patch_or_paddle(Line a) {
-    if (a.random_num == 0)  
-    {
-        a.patch_or_padddle = 1;
-    }
-    else
-    {
-        a.patch_or_padddle = 2;
-    }
+    line1.check_patch_or_paddle();
+    line2.check_patch_or_paddle();
+    line3.check_patch_or_paddle();
+    line4.check_patch_or_paddle();
+    line5.check_patch_or_paddle();
+    line6.check_patch_or_paddle();
 
 }
+
+//void check_patch_or_paddle(Line a) {
+//    if (a.random_num == 0)  
+//    {
+//        a.patch_or_padddle = 1;
+//		cout << "1";
+//    }
+//    else
+//    {
+//        a.patch_or_padddle = 2;
+//		cout << "2";
+//    }
+//
+//}
 
 void main()
 {
@@ -215,8 +241,6 @@ void main()
         {
             while (true)
             {
-                system("CLS");
-
                 screen_refresh();
 
                 if (_kbhit())
