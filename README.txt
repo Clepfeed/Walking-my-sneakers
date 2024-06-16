@@ -16,4 +16,4 @@ He is do literaly nothing(like me on maths)
 Yout character in this game is
 |player|
 He can move using WASD and DIE!!!
-BUGAGAGAGA AND GUD LUCK
+BUGAGAGAGA AND GOOD LUCK
